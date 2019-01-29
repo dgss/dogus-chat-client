@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat by Dogus Atasoy</title>
+    <link href="assets/style.css" type="text/css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width"/>
+    <script defer src="src/dev/helpers.js"></script>
+    <script defer src="src/dev/views.js"></script>
+    <script defer src="src/dev/modal.js"></script>
+    <script defer src="src/dev/chat.js"></script>
+    <script>
+        window.addEventListener("load", function () {
+            var _chat = new DogusChat();
+            _chat.init(".wrapper");
+            _chat.onMessageSent = function (msg) {
+                console.log("Dogus's Chat --> %o", msg);
+            }
+        });
+    </script>
+</head>
+<body>
+<div class="wrapper"></div>
+</body>
+</html>

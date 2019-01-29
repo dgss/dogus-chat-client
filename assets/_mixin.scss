@@ -1,0 +1,128 @@
+//Created by Dogus ATASOY 10-29-2017 18:49
+
+@mixin _flexFlow($flow) {
+  -webkit-flex-flow: $flow;
+  -moz-flex-flow: $flow;
+  -ms-flex-flow: $flow;
+  flex-flow: $flow;
+}
+
+@mixin _flexJustify($justify) {
+  -webkit-justify-content: $justify;
+  -moz-justify-content: $justify;
+  -ms-justify-content: $justify;
+  -ms-flex-pack: $justify;
+  justify-content: $justify;
+}
+
+@mixin _flexAlignItems($align) {
+  -webkit-align-items: $align;
+  -moz-align-items: $align;
+  -ms-align-items: $align;
+  align-items: $align;
+}
+
+@mixin _flex($inline:false, $flow:false,$align:false,$justify:false) {
+  @if $inline {
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -moz-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+  } @else {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  @if $flow {
+    @include _flexFlow($flow);
+  }
+
+  @if $align {
+    @include _flexAlignItems($align);
+  }
+
+  @if $justify {
+    @include _flexJustify($justify);
+  }
+}
+
+@mixin _transition($transition...) {
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  -webkit-transition: $transition;
+  transition: $transition;
+}
+
+@mixin _transform($transform) {
+  -moz-transform: $transform;
+  -o-transform: $transform;
+  -ms-transform: $transform;
+  -webkit-transform: $transform;
+  transform: $transform;
+}
+
+@mixin _pos($pos:false, $top:false, $right:false, $bottom:false, $left:false, $width:false, $height:false, $zIndex:false) {
+  @if $pos {
+    position: $pos;
+  }
+  @if $top {
+    top: $top;
+  }
+  @if $right {
+    right: $right;
+  }
+  @if $bottom {
+    bottom: $bottom;
+  }
+  @if $left {
+    left: $left;
+  }
+  @if $width {
+    width: $width;
+  }
+  @if $height {
+    height: $height;
+  }
+  @if $zIndex {
+    z-index: $zIndex;
+  }
+}
+
+@mixin _buttonClear {
+  position: relative;
+  box-sizing: border-box;
+  background-color: $clearButtonBackground;
+  cursor: pointer;
+  box-shadow: 0 3px 8px -2px rgba(0, 0, 0, 0);
+  @include _transition(all 1300ms cubic-bezier(0.25, 1, 0, 1));
+  overflow: hidden;
+  color: $clearButtonHoverBackground;
+  &:before {
+    pointer-events: none;
+    @include _transition(all 1100ms cubic-bezier(0.25, 1, 0, 1));
+    opacity: 0;
+    content: "";
+    @include _pos($pos: absolute, $top: 50%, $left: 50%, $width: 40px, $height: 40px);
+    margin-left: -20px;
+    margin-top: -20px;
+    @include _transform(translate3d(0, 30%, 0) scale(0.2, 0.2));
+    background-color: $clearButtonHoverBackground;
+    border-radius: 100%;
+  }
+
+  &:hover {
+    @include _transform(translate3d(0, -2px, 0));
+    box-shadow: 0 3px 8px -2px rgba(0, 0, 0, 0.3);
+    color: $clearButtonBackground;
+    background-color: $clearButtonHoverBackground;
+    &:before {
+      background-color: $transparentColor;
+      opacity: 1;
+      @include _transform(translate3d(0, 0, 0) scale(2, 2));
+    }
+  }
+}
